@@ -12,6 +12,7 @@ https://docs.djangoproject.com/en/5.2/ref/settings/
 
 from pathlib import Path
 import os
+import dj_database_url
 from datetime import timedelta
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -29,13 +30,13 @@ SECRET_KEY = 'django-insecure-@0+30i3#-&a(gcs^8y1%)%o=0j*+1kp12egbb6=rroq2pr++q2
 DEBUG = False
 
 # ALLOWED_HOSTS = []
-# ALLOWED_HOSTS = ['localhost','127.0.0.1','aroma-django-restapi-project.onrender.com']
+ALLOWED_HOSTS = ['localhost', '127.0.0.1', 'aroma-deploy.onrender.com/']
 # ALLOWED_HOSTS = [os.environ.get('RENDER_EXTERNAL_HOSTNAME', 'localhost')]
-ALLOWED_HOSTS = [
-    os.environ.get('RENDER_EXTERNAL_HOSTNAME', 'localhost'),
-    'localhost',
-    '127.0.0.1'
-]
+# ALLOWED_HOSTS = [
+#     os.environ.get('RENDER_EXTERNAL_HOSTNAME', 'localhost'),
+#     'localhost',
+#     '127.0.0.1'
+# ]
 
 
 
