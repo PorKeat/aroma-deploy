@@ -20,7 +20,7 @@ export async function fetchCartItems() {
     }
 
     const data = await response.json();
-    console.log("Cart data:", data);
+    // console.log("Cart data:", data);
 
     if (data.length === 0) {
       console.log("No carts found for user");

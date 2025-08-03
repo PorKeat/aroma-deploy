@@ -245,7 +245,7 @@
           }
 
           const data = await response.json();
-          console.log("Cart data:", data);
+          // console.log("Cart data:", data);
 
           if (data.length === 0) {
             console.log("No carts found for user");
@@ -334,17 +334,17 @@
             cartContainer.innerHTML = `<div class="text-gray-500 text-center">You don't have any items in your cart.</div>`;
             return;
           } else {
-            console.log("Cart items:", cartItems);
+            // console.log("Cart items:", cartItems);
             // Render cart items on page
             cartItems.forEach((item) => {
-              console.log(
-                item.product.name,
-                item.quantity,
-                item.subtotal,
-                item.product.brand,
-                item.product.categoryName,
-                item.product.size
-              );
+              // console.log(
+              //   item.product.name,
+              //   item.quantity,
+              //   item.subtotal,
+              //   item.product.brand,
+              //   item.product.categoryName,
+              //   item.product.size
+              // );
               const wrapper = document.createElement("div");
               wrapper.id = `cart-item-${item.id}`;
               wrapper.innerHTML = `
@@ -414,7 +414,7 @@
                   if (index > -1) selectedProducts.splice(index, 1);
                 }
 
-                console.log("Currently selected products:", selectedProducts);
+                // console.log("Currently selected products:", selectedProducts);
                 updateTotalSummary();
               });
 
@@ -430,7 +430,7 @@
                 item.subtotal = item.quantity * item.product.unitPrice;
                 quantitySpan.textContent = item.quantity;
                 subTotalChange.textContent = `$${item.subtotal}`;
-                console.log("Increased to", item.quantity);
+                // console.log("Increased to", item.quantity);
                 await updateCartItemQuantityandSubtotal(
                   item.id,
                   item.quantity,
@@ -444,7 +444,7 @@
                   item.subtotal = item.quantity * item.product.unitPrice;
                   quantitySpan.textContent = item.quantity;
                   subTotalChange.textContent = `$${item.subtotal}`;
-                  console.log("Decreased to", item.quantity);
+                  // console.log("Decreased to", item.quantity);
                   await updateCartItemQuantityandSubtotal(
                     item.id,
                     item.quantity,
