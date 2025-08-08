@@ -64,7 +64,7 @@ urlpatterns = [
     path('', views.home, name='home'),
     path('blog/', views.blog, name='blog'),
      path('blog/<int:id>/', views.blog_details, name='blogDetails'),
-    path('blog/<int:id>/', views.blogbreadcrumb_details, name='blogDetails'),
+    # path('blog/<int:id>/', views.blogbreadcrumb_details, name='blogDetails'),
 
     path('checkout/', views.checkout, name='checkout'),
     path('comfirmation/', views.confirmation, name='confirmation'),

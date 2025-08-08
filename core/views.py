@@ -40,11 +40,11 @@ def blog(request):
     
 def blog_details(request, id):
     blog = get_object_or_404(Blog, id=id)
-    return render(request, 'aroma/blog-Details.html', {'blog': blog})
+    return render(request, 'aroma/blog-details.html', {'blog': blog})
 
 def blogbreadcrumb_details(request, id):
     blog = get_object_or_404(Blog, id=id)
-    return render(request, 'aroma/blog-Details.html', {'blog': blog})
+    return render(request, 'aroma/blog-details.html', {'blog': blog})
     
 
 # HTML Page to serve Reset Form
