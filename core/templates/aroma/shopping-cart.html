@@ -117,7 +117,7 @@
     <script>
       async function fetchRecommendedProducts() {
         try {
-          const response = await fetch("/api/products/", {
+          const response = await fetch("/api/products/?token=qwertyuiop", {
             method: "GET",
             headers: {
               "Content-Type": "application/json",

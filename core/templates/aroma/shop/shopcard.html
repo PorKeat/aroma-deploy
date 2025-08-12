@@ -59,7 +59,7 @@
   }
 
   // Step 3: fetch and render
-  fetch("/api/products/")
+  fetch("/api/products/?token=qwertyuiop")
     .then((response) => response.json())
     .then((products) => {
       allProducts = products; // store full list
