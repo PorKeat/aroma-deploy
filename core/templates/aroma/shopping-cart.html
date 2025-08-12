@@ -266,7 +266,7 @@
       ) {
         const accessToken = localStorage.getItem("access_token");
 
-        const response = await fetch(`/api/cart-items/${cartItemId}/`, {
+        const response = await fetch(`/api/cart-items/${cartItemId}/?token=qwertyuiop`, {
           method: "PATCH",
           headers: {
             "Content-Type": "application/json",
@@ -289,7 +289,7 @@
       async function deleteCartItem(cartItemId) {
         const accessToken = localStorage.getItem("access_token");
 
-        const response = await fetch(`/api/cart-items/${cartItemId}/`, {
+        const response = await fetch(`/api/cart-items/${cartItemId}/?token=qwertyuiop`, {
           method: "DELETE",
           headers: {
             "Content-Type": "application/json",

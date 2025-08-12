@@ -43,11 +43,11 @@ def blog(request):
     
 def blog_details(request, id):
     blog = get_object_or_404(Blog, id=id)
-    return render(request, 'aroma/blog-details.html', {'blog': blog})
+    return render(request, 'aroma/blog-Details.html', {'blog': blog})
 
 def blogbreadcrumb_details(request, id):
     blog = get_object_or_404(Blog, id=id)
-    return render(request, 'aroma/blog-details.html', {'blog': blog})
+    return render(request, 'aroma/blog-Details.html', {'blog': blog})
     
 
 # HTML Page to serve Reset Form
@@ -92,9 +92,33 @@ class UserViewSet(viewsets.ModelViewSet):
     queryset = User.objects.all()
     serializer_class = UserSerializer
 
+    authentication_classes = [QueryParamAccessTokenAuthentication]
+    permission_classes = [AllowAny]  # or use custom permission
+    
+    def get_queryset(self):
+        token = self.request.query_params.get('token')
+        if not AccessToken.objects.filter(token=token, is_active=True).exists():
+            from django.http import JsonResponse
+            raise AuthenticationFailed("Invalid or inactive token")
+    
+        queryset = super().get_queryset()
+        return queryset
+
 class CustomerViewSet(viewsets.ModelViewSet):
     queryset = Customer.objects.all()
     serializer_class = CustomerSerializer
+
+    authentication_classes = [QueryParamAccessTokenAuthentication]
+    permission_classes = [AllowAny]  # or use custom permission
+    
+    def get_queryset(self):
+        token = self.request.query_params.get('token')
+        if not AccessToken.objects.filter(token=token, is_active=True).exists():
+            from django.http import JsonResponse
+            raise AuthenticationFailed("Invalid or inactive token")
+    
+        queryset = super().get_queryset()
+        return queryset
     
 # CustomerProfile 
 class CustomerProfileViewSet(viewsets.ViewSet):
@@ -162,23 +186,62 @@ class ImageTypeViewSet(viewsets.ModelViewSet):
     queryset = ImageType.objects.all()
     serializer_class = ImageTypeSerializer
 
+    authentication_classes = [QueryParamAccessTokenAuthentication]
+    permission_classes = [AllowAny]  # or use custom permission
+    
+    def get_queryset(self):
+        token = self.request.query_params.get('token')
+        if not AccessToken.objects.filter(token=token, is_active=True).exists():
+            from django.http import JsonResponse
+            raise AuthenticationFailed("Invalid or inactive token")
+    
+        queryset = super().get_queryset()
+        return queryset
+
 class ImageViewSet(viewsets.ModelViewSet):
     queryset = Image.objects.all()
     serializer_class = ImageSerializer
+
+    authentication_classes = [QueryParamAccessTokenAuthentication]
+    permission_classes = [AllowAny]  # or use custom permission
+    
+    def get_queryset(self):
+        token = self.request.query_params.get('token')
+        if not AccessToken.objects.filter(token=token, is_active=True).exists():
+            from django.http import JsonResponse
+            raise AuthenticationFailed("Invalid or inactive token")
+    
+        queryset = super().get_queryset()
+        return queryset
 
 # ================================================ Product ====================================
 
 class CategoryViewSet(viewsets.ModelViewSet):
     queryset = Category.objects.all()
     serializer_class = CategorySerializer
+        
+    authentication_classes = [QueryParamAccessTokenAuthentication]
+    permission_classes = [AllowAny]  # or use custom permission
+    
+    def get_queryset(self):
+        token = self.request.query_params.get('token')
+        if not AccessToken.objects.filter(token=token, is_active=True).exists():
+            from django.http import JsonResponse
+            raise AuthenticationFailed("Invalid or inactive token")
+    
+        queryset = super().get_queryset()
+        return queryset
+
+
 
 class ProductViewSet(viewsets.ModelViewSet):
     queryset = Product.objects.all()
     serializer_class = ProductSerializer
 
+
     authentication_classes = [QueryParamAccessTokenAuthentication]
     permission_classes = [AllowAny]  # or use custom permission
-
+    
     def get_queryset(self):
 
         token = self.request.query_params.get('token')
@@ -192,8 +255,21 @@ class ProductViewSet(viewsets.ModelViewSet):
             queryset = queryset.filter(categoryID_id=category_id)
         return queryset
 
+
 class ProductDetailViewSet(viewsets.ModelViewSet):
     serializer_class = ProductDetailSerializer
+
+    authentication_classes = [QueryParamAccessTokenAuthentication]
+    permission_classes = [AllowAny]  # or use custom permission
+    
+    def get_queryset(self):
+        token = self.request.query_params.get('token')
+        if not AccessToken.objects.filter(token=token, is_active=True).exists():
+            from django.http import JsonResponse
+            raise AuthenticationFailed("Invalid or inactive token")
+    
+        queryset = super().get_queryset()
+        return queryset
 
     def get_queryset(self):
         product_id = self.request.query_params.get('productID')
@@ -207,9 +283,33 @@ class CartViewSet(viewsets.ModelViewSet):
     queryset = Cart.objects.all()
     serializer_class = CartSerializer
 
+    authentication_classes = [QueryParamAccessTokenAuthentication]
+    permission_classes = [AllowAny]  # or use custom permission
+    
+    def get_queryset(self):
+        token = self.request.query_params.get('token')
+        if not AccessToken.objects.filter(token=token, is_active=True).exists():
+            from django.http import JsonResponse
+            raise AuthenticationFailed("Invalid or inactive token")
+    
+        queryset = super().get_queryset()
+        return queryset
+
 class CartItemViewSet(viewsets.ModelViewSet):
     queryset = CartItem.objects.all()
     serializer_class = CartItemSerializer
+
+    authentication_classes = [QueryParamAccessTokenAuthentication]
+    permission_classes = [AllowAny]  # or use custom permission
+    
+    def get_queryset(self):
+        token = self.request.query_params.get('token')
+        if not AccessToken.objects.filter(token=token, is_active=True).exists():
+            from django.http import JsonResponse
+            raise AuthenticationFailed("Invalid or inactive token")
+    
+        queryset = super().get_queryset()
+        return queryset
 
 class CustomerCartItemViewSet(viewsets.ModelViewSet):
     queryset = CartItem.objects.all()
@@ -256,6 +356,18 @@ class QRCodeViewSet(viewsets.ModelViewSet):
     queryset = QRCode.objects.all()
     serializer_class = QRCodeSerializer
 
+    authentication_classes = [QueryParamAccessTokenAuthentication]
+    permission_classes = [AllowAny]  # or use custom permission
+    
+    def get_queryset(self):
+        token = self.request.query_params.get('token')
+        if not AccessToken.objects.filter(token=token, is_active=True).exists():
+            from django.http import JsonResponse
+            raise AuthenticationFailed("Invalid or inactive token")
+    
+        queryset = super().get_queryset()
+        return queryset
+
 
 # ================================================ AddressViewSet ====================================
 
@@ -263,6 +375,18 @@ class QRCodeViewSet(viewsets.ModelViewSet):
 class AddressViewSet(viewsets.ModelViewSet):
     queryset = Address.objects.all()
     serializer_class = AddressSerializer
+
+    authentication_classes = [QueryParamAccessTokenAuthentication]
+    permission_classes = [AllowAny]  # or use custom permission
+    
+    def get_queryset(self):
+        token = self.request.query_params.get('token')
+        if not AccessToken.objects.filter(token=token, is_active=True).exists():
+            from django.http import JsonResponse
+            raise AuthenticationFailed("Invalid or inactive token")
+    
+        queryset = super().get_queryset()
+        return queryset
 
 # Instead of requiring a customer_id in the URL, auto-fetch addresses for the logged-in customer
 class CustomerAddressViewSet(viewsets.ModelViewSet):
@@ -292,9 +416,34 @@ class OrderViewSet(viewsets.ModelViewSet):
     queryset = Order.objects.all()
     serializer_class = OrderSerializer
 
+    authentication_classes = [QueryParamAccessTokenAuthentication]
+    permission_classes = [AllowAny]  # or use custom permission
+    
+    def get_queryset(self):
+        token = self.request.query_params.get('token')
+        if not AccessToken.objects.filter(token=token, is_active=True).exists():
+            from django.http import JsonResponse
+            raise AuthenticationFailed("Invalid or inactive token")
+    
+        queryset = super().get_queryset()
+        return queryset
+    
+
 class OrderItemViewSet(viewsets.ModelViewSet):
     queryset = OrderItem.objects.all()
     serializer_class = OrderItemSerializer
+
+    authentication_classes = [QueryParamAccessTokenAuthentication]
+    permission_classes = [AllowAny]  # or use custom permission
+    
+    def get_queryset(self):
+        token = self.request.query_params.get('token')
+        if not AccessToken.objects.filter(token=token, is_active=True).exists():
+            from django.http import JsonResponse
+            raise AuthenticationFailed("Invalid or inactive token")
+    
+        queryset = super().get_queryset()
+        return queryset
 
 class CustomerOrderViewSet(viewsets.ModelViewSet):
     queryset = Order.objects.all()
@@ -381,7 +530,33 @@ class BlogViewSet(viewsets.ModelViewSet):
     queryset = Blog.objects.all()
     serializer_class = BlogSerializer
 
+    authentication_classes = [QueryParamAccessTokenAuthentication]
+    permission_classes = [AllowAny]  # or use custom permission
+    
+    def get_queryset(self):
+        token = self.request.query_params.get('token')
+        if not AccessToken.objects.filter(token=token, is_active=True).exists():
+            from django.http import JsonResponse
+            raise AuthenticationFailed("Invalid or inactive token")
+    
+        queryset = super().get_queryset()
+        return queryset
+
 class BlogDetailViewSet(viewsets.ModelViewSet):
     queryset = BlogDetail.objects.all()
     serializer_class = BlogDetailSerializer
+
+    
+    authentication_classes = [QueryParamAccessTokenAuthentication]
+    permission_classes = [AllowAny]  # or use custom permission
+    
+    def get_queryset(self):
+
+        token = self.request.query_params.get('token')
+        if not AccessToken.objects.filter(token=token, is_active=True).exists():
+            from django.http import JsonResponse
+            raise AuthenticationFailed("Invalid or inactive token")
+    
+        queryset = super().get_queryset()
+        return queryset
 
